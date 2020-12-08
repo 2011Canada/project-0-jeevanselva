@@ -1,7 +1,8 @@
 package com.revature.models;
 
 public class Person {
-	String name;
+	String firstName;
+	String lastName;
 	int age;
 	String phoneNumber;
 	String emailAddress;
