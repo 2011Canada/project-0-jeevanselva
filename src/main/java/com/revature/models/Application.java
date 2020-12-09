@@ -10,4 +10,9 @@ public class Application {
 		this.statusOfApplication = "pending";
 	}
 
+	@Override
+	public String toString() {
+		return "Application [newCustomer=" + newCustomer + ", statusOfApplication=" + statusOfApplication + "]";
+	}
+
 }
