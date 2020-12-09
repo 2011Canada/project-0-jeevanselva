@@ -25,7 +25,6 @@ public void getUserCredentials() {
 	    }
 	} while (!verified);
    
-   System.out.println("Login passed");
 }
 	
 	public boolean getValidated (String userName, String password) {
