@@ -9,7 +9,7 @@ public class ApplicationMenuDebugger {
 	public static void main(String[] args) {
 		ApplicationMenu menu = new ApplicationMenu();
 		menu.submitApplication();
-		System.out.println("**********************************************");
+		System.out.println("*******");
 		ArrayDeque<Application> applications = (ArrayDeque<Application>) ApplicationService.getApplications();
 		System.out.println(applications.getFirst());
 	}

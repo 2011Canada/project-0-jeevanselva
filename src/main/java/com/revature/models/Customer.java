@@ -9,4 +9,7 @@ public class Customer extends Person {
 		this.myMaccount = myMaccount;
 	}
 
+	public Account getAccount() {
+		return this.myMaccount;
+	}
 }
