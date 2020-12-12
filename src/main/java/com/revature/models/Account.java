@@ -2,12 +2,14 @@ package com.revature.models;
 
 public abstract class Account {
 	private double accountBalance;
-	private int accountNumber = 1000000;
+	private static int accountCounter = 1000000000;
+	private int accountNumber;
 
 	public Account() {
 		super();
 		this.accountBalance = 0;
-		this.accountNumber++;
+		accountCounter++;
+		this.accountNumber = accountCounter + 1;
 	}
 
 	public boolean accountDeposit(double deposit) {
