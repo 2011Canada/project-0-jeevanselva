@@ -43,4 +43,36 @@ public abstract class Account {
 		return this.accountNumber;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(accountBalance);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + accountNumber;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
+			return false;
+		if (accountNumber != other.accountNumber)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [accountBalance=" + accountBalance + ", accountNumber=" + accountNumber + "]";
+	}
+
 }

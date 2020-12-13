@@ -1,17 +1,21 @@
 package com.revature.service;
-import  com.revature.repositories.LoginDAO;
 
+import com.revature.models.User;
+import com.revature.repositories.UserDAO;
 
 public class LoginService {
 
-	LoginDAO userCredentials;
-	
-	public LoginService (LoginDAO userCredentials) {
-		this.userCredentials = userCredentials;
+	public LoginService() {
 	}
-	
-	public boolean loginVerify(String userName, String password) {
-	return userCredentials.loginVerify(userName, password);
-}
-}
 
+	public boolean loginVerify(String userName, String password) {
+		UserDAO dao = new UserDAO();
+		User currentUser = dao.readUser(userName, password);
+		if (currentUser != null) {
+			System.out.println(currentUser);
+			return true;
+		} else
+			return false;
+
+	}
+}
