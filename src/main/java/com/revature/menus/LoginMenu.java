@@ -2,16 +2,26 @@ package com.revature.menus;
 
 import java.util.Scanner;
 
+import com.revature.factory.MenuFactory;
 import com.revature.service.LoginService;
 
-public class LoginMenu {
+public class LoginMenu extends Menu {
 	private LoginService service;
 
-	public LoginMenu(LoginService service) {
-		this.service = service;
+	public LoginMenu() {
+		service = new LoginService();
 	}
 
-	public void getUserCredentials() {
+	@Override
+
+	public void displayMenu() {
+		this.getInput();
+		System.out.println();
+		System.out.println("You have successfuly logged in!");
+		System.out.println("Press 1 to continue");
+	}
+
+	public void getInput() {
 		Scanner scanner = new Scanner(System.in);
 		boolean verified = false;
 		do {
@@ -25,12 +35,24 @@ public class LoginMenu {
 				System.out.println("Please try again!");
 			}
 		} while (!verified);
-		System.out.println("Welcome!");
-
+		scanner.close();
 	}
 
 	public boolean getValidated(String userName, String password) {
 
 		return service.loginVerify(userName, password);
-	};
+	}
+
+	@Override
+	public Menu navigateMenu() {
+		Menu nextMenu = null;
+		switch (this.getOption()) {
+		case 1:
+			nextMenu = MenuFactory.menuBuilder("customer");
+			break;
+		}
+		return nextMenu;
+
+	}
+
 }

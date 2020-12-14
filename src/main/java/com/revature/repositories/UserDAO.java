@@ -35,8 +35,6 @@ public class UserDAO {
 			ResultSet result = readUserStatement.executeQuery();
 			if (result.next()) {
 				currentUser.setUserId(result.getInt("user_Id"));
-				currentUser.setUserName(result.getString("user_name"));
-				currentUser.setPassword(result.getString("password"));
 				currentUser.setRole(result.getString("role"));
 			}
 		} catch (SQLException e) {

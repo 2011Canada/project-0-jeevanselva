@@ -8,7 +8,7 @@ import com.revature.service.ApplicationService;
 public class ApplicationMenuDebugger {
 	public static void main(String[] args) {
 		ApplicationMenu menu = new ApplicationMenu();
-		menu.submitApplication();
+		menu.newApplication();
 		System.out.println("*******");
 		ArrayDeque<Application> applications = (ArrayDeque<Application>) ApplicationService.getApplications();
 		System.out.println(applications.getFirst());

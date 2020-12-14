@@ -12,7 +12,7 @@ public class LoginService {
 		UserDAO dao = new UserDAO();
 		User currentUser = dao.readUser(userName, password);
 		if (currentUser != null) {
-			System.out.println(currentUser);
+			UserService.setCurrentUser(currentUser);
 			return true;
 		} else
 			return false;

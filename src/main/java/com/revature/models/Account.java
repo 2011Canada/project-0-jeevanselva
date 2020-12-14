@@ -1,8 +1,9 @@
 package com.revature.models;
 
-public abstract class Account {
+public class Account {
+	private int userId;
 	private double accountBalance;
-	private static int accountCounter = 1000000000;
+	private static int accountCounter = 100;
 	private int accountNumber;
 
 	public Account() {
@@ -10,6 +11,7 @@ public abstract class Account {
 		this.accountBalance = 0;
 		accountCounter++;
 		this.accountNumber = accountCounter + 1;
+		this.userId = CurrentUser.getUserId();
 	}
 
 	public boolean accountDeposit(double deposit) {
@@ -35,8 +37,20 @@ public abstract class Account {
 		return this.accountBalance;
 	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
 	public void setAccountBalance(double addMoney) {
 		this.accountBalance = addMoney;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 	public int getAccountNumber() {
@@ -55,24 +69,9 @@ public abstract class Account {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		if (Double.doubleToLongBits(accountBalance) != Double.doubleToLongBits(other.accountBalance))
-			return false;
-		if (accountNumber != other.accountNumber)
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
-		return "Account [accountBalance=" + accountBalance + ", accountNumber=" + accountNumber + "]";
+		return "Account [userId=" + userId + ", accountBalance=" + accountBalance + ", accountNumber=" + accountNumber
+				+ "]";
 	}
 
 }
