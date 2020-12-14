@@ -39,7 +39,7 @@ public class TransferService {
 		String value = null;
 		if (transaction) {
 			AccountService accountService = new AccountService();
-			accountService.accountDepositService(amount);
+			accountService.accountWithdrawalService(amount);
 			String amountInString = String.valueOf(amount);
 			String accountInString = ((Integer) account).toString();
 			value = ((Integer) this.userAccount.getAccountNumber()).toString() + "XXXXX" + amountInString;
@@ -77,10 +77,9 @@ public class TransferService {
 		if (accept == true) {
 			service.accountDepositService(this.moneyTransferAmount);
 		} else {
-			transferDao.updateAnotherAccount(this.senderAccount, this.moneyTransferAmount);
-
-			/// need to implement a solution for what happens if the money transfer is
-			/// declined
+			double senderBalance = transferDao.readAnotherAccount(this.senderAccount);
+			senderBalance += this.moneyTransferAmount;
+			transferDao.updateAnotherAccount(this.senderAccount, senderBalance);
 		}
 
 	}

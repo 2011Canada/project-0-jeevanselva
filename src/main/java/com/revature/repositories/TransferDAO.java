@@ -12,6 +12,26 @@ public class TransferDAO {
 	public TransferDAO() {
 	}
 
+	public double readAnotherAccount(int accountNumber) {
+		DatabaseConnection DbConnection = new DatabaseConnection();
+		Connection newConnection = DbConnection.getDbConnection();
+		double balance = 0;
+		try {
+
+			String sql = "select account_balance from account where account_number=?;";
+			PreparedStatement readStatement = newConnection.prepareStatement(sql);
+			readStatement.setDouble(1, accountNumber);
+			ResultSet result = readStatement.executeQuery();
+
+			if (result.next()) {
+				balance = result.getDouble("account_balance");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return balance;
+	}
+
 	public void updateAnotherAccount(int accountNumber, double balance) {
 		DatabaseConnection DbConnection = new DatabaseConnection();
 		Connection newConnection = DbConnection.getDbConnection();

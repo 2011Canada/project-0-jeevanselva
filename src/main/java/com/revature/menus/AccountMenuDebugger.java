@@ -12,5 +12,9 @@ public class AccountMenuDebugger {
 		AccountService service = new AccountService();
 		double balance = service.accountBalanceService();
 		System.out.println(balance);
+		service.accountWithdrawalService(75);
+		double newBalance = service.accountBalanceService();
+		System.out.println(newBalance);
+
 	}
 }
