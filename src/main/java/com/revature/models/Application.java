@@ -55,7 +55,7 @@ public class Application {
 
 	@Override
 	public String toString() {
-		return "Application [newCustomer=" + newCustomer + ", statusOfApplication=" + statusOfApplication + "]";
+		return "this.newCustomer";
 	}
 
 }

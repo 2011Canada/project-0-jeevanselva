@@ -17,6 +17,9 @@ public class Person {
 		this.emailAddress = emailAddress;
 	}
 
+	public Person() {
+	}
+
 	public int getPersonId() {
 		return personId;
 	}
@@ -116,8 +119,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age
-				+ ", phoneNumber=" + phoneNumber + ", emailAddress=" + emailAddress + "]";
+		return this.firstName + "\n" + lastName + "\n" + age + "\n" + phoneNumber + "\n" + emailAddress;
 	}
 
 }

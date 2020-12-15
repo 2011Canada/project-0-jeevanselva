@@ -1,6 +1,8 @@
 package com.revature.service;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Account;
+import com.revature.models.CurrentUser;
 import com.revature.repositories.AccountDAO;
 
 public class AccountService {
@@ -16,6 +18,7 @@ public class AccountService {
 	public double accountBalanceService() {
 		Account account = dao.getUserAccount();
 		double currentBalance = account.getAccountBalance();
+		BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " checked balance");
 		return currentBalance;
 	}
 
@@ -24,33 +27,28 @@ public class AccountService {
 		double balance = userAccount.getAccountBalance();
 		if (transaction) {
 			dao.accountUpdate(balance);
+			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " made a valid deposit");
 			return true;
 		} else {
+			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " attempted invalid deposit");
 			return false;
 		}
-		/*
-		 * if (transaction) { System.out.println("The amount of $" + deposit +
-		 * " has been successfuly deposited in your account"); return true; } else {
-		 * System.out.
-		 * println("This was an invalid transaction! Your deposit amount has to be greater than 0"
-		 * ); return false; }
-		 */
+
 	}
 
 	public boolean accountWithdrawalService(double withdrawalAmount) {
 		boolean transaction = userAccount.accountWithdrawal(withdrawalAmount);
 		double balance = userAccount.getAccountBalance();
 		if (transaction) {
+			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " made a withdrawal");
 			dao.accountUpdate(balance);
+
 			return true;
 		} else {
+			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " attempted invalid withdrawal");
 			return false;
+
 		}
 	}
-	/*
-	 * 
-	 * if (transaction) { System.out.println(" A withdrawal amount of $" +
-	 * withdrawalAmount + " will be dispensed!"); return true; } else {
-	 * System.out.println("This was an invalid transaction!"); return false; }
-	 */
+
 }

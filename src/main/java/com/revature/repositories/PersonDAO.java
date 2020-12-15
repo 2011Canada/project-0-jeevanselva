@@ -27,8 +27,7 @@ public class PersonDAO {
 			createPersonStatement.setString(2, person.getLastName());
 			createPersonStatement.setInt(3, person.getAge());
 			createPersonStatement.setString(4, person.getPhoneNumber());
-			createPersonStatement.setString(5, person.getLastName());
-			createPersonStatement.setString(6, person.getEmailAddress());
+			createPersonStatement.setString(5, person.getEmailAddress());
 
 			ResultSet result = createPersonStatement.executeQuery();
 			if (result.next()) {

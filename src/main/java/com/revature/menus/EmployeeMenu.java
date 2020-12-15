@@ -1,17 +1,113 @@
 package com.revature.menus;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+import com.revature.factory.MenuFactory;
+import com.revature.models.Account;
+import com.revature.models.Application;
+import com.revature.models.CustomerAccounts;
+import com.revature.service.ApplicationService;
+import com.revature.service.EmployeeService;
+import com.revature.service.LogoutService;
+
 public class EmployeeMenu extends Menu {
+	EmployeeService employeeService;
+	ApplicationService applicationService;
+	Scanner employeeScanner;
+
+	public EmployeeMenu() {
+		this.employeeService = new EmployeeService();
+		this.applicationService = new ApplicationService();
+		this.employeeScanner = new Scanner(System.in);
+	}
 
 	@Override
 	public void displayMenu() {
-		// TODO Auto-generated method stub
 
+		System.out.println("1. Check New Applications");
+		System.out.println("2. View Customer Accounts");
+		System.out.println("3. View all transactions");
+	}
+
+	public void viewCustomers() {
+		CustomerAccounts accounts = employeeService.viewAllCustomerAccounts();
+		ArrayList<Account> viewAccounts = (ArrayList<Account>) accounts.getAccounts();
+		Iterator<Account> iteratorAccounts = viewAccounts.iterator();
+		while (iteratorAccounts.hasNext()) {
+			System.out.println(iteratorAccounts.next());
+		}
+
+	}
+
+	public void checkApplications() {
+		boolean check;
+		check = applicationService.checkNewApplications();
+		if (check == true) {
+			this.retrieveApplication();
+		} else {
+			System.out.println("No new applications");
+		}
+	}
+
+	public void ViewAllTransactions() {
+		try {
+			BufferedReader logReader = new BufferedReader(new FileReader("./log/trace.log"));
+			String logLine;
+
+			while ((logLine = logReader.readLine()) != null) {
+
+				System.out.println(logLine);
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Menu navigateMenu() {
-		// TODO Auto-generated method stub
-		return null;
+		Menu nextMenu = MenuFactory.menuBuilder("account");
+		switch (this.getOption()) {
+		case "1":
+
+		case "0":
+			LogoutService service = new LogoutService();
+			nextMenu = MenuFactory.menuBuilder("main");
+		}
+		return nextMenu;
 	}
 
+	public void retrieveApplication() {
+		boolean notEmpty;
+		notEmpty = applicationService.checkNewApplications();
+		Application newApplication;
+		while (notEmpty) {
+			int count = 1;
+			System.out.println(count + ".");
+			newApplication = applicationService.getApplicationFromQueue();
+			System.out.println(newApplication);
+			this.approveApplication(newApplication);
+			notEmpty = applicationService.checkNewApplications();
+		}
+		System.out.println("No more applications");
+
+	}
+
+	public void approveApplication(Application application) {
+		System.out.println("1. Accept");
+		System.out.println("2. Decline");
+		String option = this.employeeScanner.nextLine();
+		if (option.equals("1")) {
+			employeeService.approveApplication(application);
+			System.out.println("Application approved");
+		} else if (option.equals("2")) {
+			System.out.println("Application declined");
+		}
+	}
 }

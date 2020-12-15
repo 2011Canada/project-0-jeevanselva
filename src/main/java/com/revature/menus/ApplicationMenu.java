@@ -92,7 +92,7 @@ public class ApplicationMenu extends Menu {
 	public Menu navigateMenu() {
 		Menu nextMenu = null;
 		switch (this.getOption()) {
-		case 1:
+		case "0":
 			nextMenu = MenuFactory.menuBuilder("main");
 			break;
 		}

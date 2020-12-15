@@ -1,5 +1,6 @@
 package com.revature.factory;
 
+import com.revature.menus.AccountMenu;
 import com.revature.menus.ApplicationMenu;
 import com.revature.menus.EmployeeMenu;
 import com.revature.menus.LoginMenu;
@@ -19,6 +20,8 @@ public class MenuFactory {
 
 		} else if (type.equalsIgnoreCase("employee")) {
 			return new EmployeeMenu();
+		} else if (type.equalsIgnoreCase("employee")) {
+			return new AccountMenu();
 		} else {
 			return null;
 		}

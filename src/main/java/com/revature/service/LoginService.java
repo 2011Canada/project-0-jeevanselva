@@ -11,8 +11,8 @@ public class LoginService {
 	public boolean loginVerify(String userName, String password) {
 		UserDAO dao = new UserDAO();
 		User currentUser = dao.readUser(userName, password);
+		UserService.setCurrentUser(currentUser);
 		if (currentUser != null) {
-			UserService.setCurrentUser(currentUser);
 			return true;
 		} else
 			return false;

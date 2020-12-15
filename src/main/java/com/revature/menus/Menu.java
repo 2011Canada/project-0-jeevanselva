@@ -2,13 +2,13 @@ package com.revature.menus;
 
 public abstract class Menu {
 
-	private int option;
+	private String option;
 
-	public int getOption() {
+	public String getOption() {
 		return option;
 	}
 
-	public void setOption(int option) {
+	public void setOption(String option) {
 		this.option = option;
 	}
 

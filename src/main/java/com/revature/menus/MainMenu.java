@@ -15,11 +15,11 @@ public class MainMenu extends Menu {
 	public Menu navigateMenu() {
 		Menu nextMenu = null;
 		switch (this.getOption()) {
-		case 1:
+		case "1":
 			nextMenu = MenuFactory.menuBuilder("login");
 			break;
 
-		case 2:
+		case "2":
 			nextMenu = MenuFactory.menuBuilder("application");
 			break;
 		}

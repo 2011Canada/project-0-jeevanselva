@@ -3,6 +3,7 @@ package com.revature.service;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Account;
 import com.revature.models.Application;
 import com.revature.models.Customer;
@@ -30,13 +31,14 @@ public class ApplicationService {
 	}
 
 	public Application getApplicationFromQueue() {
-		return applicationQueue.getFirst();
+		return applicationQueue.removeFirst();
 	}
 
 	public void submitApplication(Person person, Account account, User user) {
 		Customer newCustomer = new Customer(person, account, user);
 		Application newApplication = new Application(newCustomer);
 		ApplicationService.addApplicationToQueue(newApplication);
+		BankAppLauncher.appLogger.debug("New customer application submitted");
 	}
 
 }

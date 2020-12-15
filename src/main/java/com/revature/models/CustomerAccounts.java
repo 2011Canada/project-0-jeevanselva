@@ -36,11 +36,6 @@ public class CustomerAccounts {
 
 	}
 
-	@Override
-	public String toString() {
-		return "while CustomerAccounts [accounts=" + accounts + "]";
-	}
-
 	public void addAccount(Account account) {
 		this.accounts.add(account);
 	}

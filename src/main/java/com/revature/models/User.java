@@ -14,6 +14,7 @@ public class User {
 	public User(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
+		this.role = "customer";
 	}
 
 	public int getUserId() {

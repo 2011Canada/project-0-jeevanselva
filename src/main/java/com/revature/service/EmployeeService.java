@@ -1,7 +1,9 @@
 package com.revature.service;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Account;
 import com.revature.models.Application;
+import com.revature.models.CurrentUser;
 import com.revature.models.Customer;
 import com.revature.models.CustomerAccounts;
 import com.revature.models.Person;
@@ -33,6 +35,7 @@ public class EmployeeService {
 		int userId = newUser.getUserId();
 		newAccount.setUserId(userId);
 		accountDao.createAccount(newAccount);
+		BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " approved new application");
 	}
 
 }

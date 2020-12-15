@@ -7,6 +7,7 @@ import com.revature.service.LoginService;
 
 public class LoginMenu extends Menu {
 	private LoginService service;
+	Scanner scanner = new Scanner(System.in);
 
 	public LoginMenu() {
 		service = new LoginService();
@@ -22,7 +23,6 @@ public class LoginMenu extends Menu {
 	}
 
 	public void getInput() {
-		Scanner scanner = new Scanner(System.in);
 		boolean verified = false;
 		do {
 			System.out.println("Please enter your username: ");
@@ -35,7 +35,6 @@ public class LoginMenu extends Menu {
 				System.out.println("Please try again!");
 			}
 		} while (!verified);
-		scanner.close();
 	}
 
 	public boolean getValidated(String userName, String password) {
@@ -47,9 +46,16 @@ public class LoginMenu extends Menu {
 	public Menu navigateMenu() {
 		Menu nextMenu = null;
 		switch (this.getOption()) {
-		case 1:
+		case "1":
 			nextMenu = MenuFactory.menuBuilder("customer");
+			/*
+			 * if (CurrentUser.getRole().equals("customer")) {
+			 * 
+			 * } else if (CurrentUser.getRole().equals("employee")) { nextMenu =
+			 * MenuFactory.menuBuilder("employee"); }
+			 */
 			break;
+
 		}
 		return nextMenu;
 

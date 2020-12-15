@@ -4,8 +4,7 @@ public class CustomerMenu extends Menu {
 
 	@Override
 	public void displayMenu() {
-		// TODO Auto-generated method stub
-
+		System.out.println("This is the customer Menu");
 	}
 
 	@Override

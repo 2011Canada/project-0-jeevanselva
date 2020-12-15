@@ -17,7 +17,7 @@ public class AccountDAO {
 		this.currentUserId = CurrentUser.getUserId();
 	}
 
-	public void createAccount(Account account) {
+	public Account createAccount(Account account) {
 		DatabaseConnection DbConnection = new DatabaseConnection();
 		Connection newConnection = DbConnection.getDbConnection();
 
@@ -34,6 +34,7 @@ public class AccountDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return account;
 	}
 
 	public Account getUserAccount() {
