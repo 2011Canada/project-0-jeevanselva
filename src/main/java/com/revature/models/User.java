@@ -2,10 +2,18 @@ package com.revature.models;
 
 public class User {
 	private int userId;
+	private int personId;
+	private String userName;
+	private String password;
 	private String role;
 
 	public User() {
 		super();
+	}
+
+	public User(String userName, String password) {
+		this.userName = userName;
+		this.password = password;
 	}
 
 	public int getUserId() {
@@ -22,6 +30,30 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(int personId) {
+		this.personId = personId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
@@ -54,7 +86,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", role=" + role + "]";
+		return "User [userId=" + userId + ", personId=" + personId + ", userName=" + userName + ", password=" + password
+				+ ", role=" + role + "]";
 	}
 
 }

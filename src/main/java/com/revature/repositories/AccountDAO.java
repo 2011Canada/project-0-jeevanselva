@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.revature.models.Account;
 import com.revature.models.CurrentUser;
+import com.revature.models.CustomerAccounts;
 import com.revature.util.DatabaseConnection;
 
 public class AccountDAO {
@@ -14,6 +15,25 @@ public class AccountDAO {
 
 	public AccountDAO() {
 		this.currentUserId = CurrentUser.getUserId();
+	}
+
+	public void createAccount(Account account) {
+		DatabaseConnection DbConnection = new DatabaseConnection();
+		Connection newConnection = DbConnection.getDbConnection();
+
+		try {
+
+			String sql = "insert into account(account_number, type, account_balance, user_id) "
+					+ "values (?,?,?,?) returning account_number;";
+			PreparedStatement createPersonStatement = newConnection.prepareStatement(sql);
+			createPersonStatement.setInt(1, account.getAccountNumber());
+			createPersonStatement.setString(2, account.getType());
+			createPersonStatement.setDouble(3, account.getAccountBalance());
+			createPersonStatement.setInt(4, account.getUserId());
+			createPersonStatement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Account getUserAccount() {
@@ -35,6 +55,31 @@ public class AccountDAO {
 			e.printStackTrace();
 		}
 		return currentAccount;
+
+	}
+
+	public CustomerAccounts getAllAccounts() {
+		DatabaseConnection DbConnection = new DatabaseConnection();
+		Connection newConnection = DbConnection.getDbConnection();
+		CustomerAccounts listOfAccounts = new CustomerAccounts();
+
+		try {
+
+			String sql = "select * from account;";
+			PreparedStatement getAccountStatement = newConnection.prepareStatement(sql);
+			ResultSet result = getAccountStatement.executeQuery();
+			while (result.next()) {
+				Account currentAccount = new Account();
+				currentAccount.setAccountBalance(result.getDouble("account_balance"));
+				currentAccount.setAccountNumber(result.getInt("account_number"));
+				currentAccount.setUserId(result.getInt("user_id"));
+				currentAccount.setType(result.getString("type"));
+				listOfAccounts.addAccount(currentAccount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listOfAccounts;
 
 	}
 

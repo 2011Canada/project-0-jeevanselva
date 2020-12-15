@@ -15,7 +15,28 @@ public class UserDAO {
 		super();
 	}
 
-	public void createUser() {
+	public User createUser(User newUser) {
+		Connection newConnection = DbConnection.getDbConnection();
+
+		try {
+
+			String sql = "insert into \"user\"(person_id, user_name,"
+					+ " password, role) values (?,?,?,?) returning user_id;";
+			PreparedStatement createUserStatement = newConnection.prepareStatement(sql);
+			createUserStatement.setInt(1, newUser.getPersonId());
+			createUserStatement.setString(2, newUser.getUserName());
+			createUserStatement.setString(3, newUser.getPassword());
+			createUserStatement.setString(4, newUser.getRole());
+
+			ResultSet result = createUserStatement.executeQuery();
+			if (result.next()) {
+				newUser.setPersonId(result.getInt("user_Id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return newUser;
+
 	}
 
 	public void deleteUser() {

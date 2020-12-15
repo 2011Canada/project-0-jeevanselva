@@ -5,6 +5,7 @@ public class Account {
 	private double accountBalance;
 	private static int accountCounter = 100;
 	private int accountNumber;
+	private String type;
 
 	public Account() {
 		super();
@@ -12,6 +13,7 @@ public class Account {
 		accountCounter++;
 		this.accountNumber = accountCounter + 1;
 		this.userId = CurrentUser.getUserId();
+		this.type = this.getClass().getName();
 	}
 
 	public boolean accountDeposit(double deposit) {
@@ -57,6 +59,14 @@ public class Account {
 		return this.accountNumber;
 	}
 
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,7 +81,7 @@ public class Account {
 	@Override
 	public String toString() {
 		return "Account [userId=" + userId + ", accountBalance=" + accountBalance + ", accountNumber=" + accountNumber
-				+ "]";
+				+ ", type=" + type + "]";
 	}
 
 }

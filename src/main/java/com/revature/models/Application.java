@@ -14,10 +14,6 @@ public class Application {
 		return newCustomer;
 	}
 
-	public void setNewCustomer(Customer newCustomer) {
-		this.newCustomer = newCustomer;
-	}
-
 	public String getStatusOfApplication() {
 		return statusOfApplication;
 	}
