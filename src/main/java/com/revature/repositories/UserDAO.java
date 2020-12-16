@@ -47,7 +47,6 @@ public class UserDAO {
 		User currentUser = new User();
 
 		try {
-
 			String sql = "select * from \"user\" where user_name=? and password =?;";
 			PreparedStatement readUserStatement = newConnection.prepareStatement(sql);
 			readUserStatement.setString(1, user);
@@ -58,6 +57,7 @@ public class UserDAO {
 				currentUser.setUserId(result.getInt("user_Id"));
 				currentUser.setRole(result.getString("role"));
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

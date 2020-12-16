@@ -14,8 +14,8 @@ public class EmployeeMenuDebugger {
 
 		EmployeeMenu em = new EmployeeMenu();
 		ApplicationService as = new ApplicationService();
-		as.submitApplication(person, account, user);
-		em.checkApplications();
+
+		em.viewAllTransactions();
 	}
 
 }

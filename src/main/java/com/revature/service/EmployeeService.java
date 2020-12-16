@@ -5,7 +5,7 @@ import com.revature.models.Account;
 import com.revature.models.Application;
 import com.revature.models.CurrentUser;
 import com.revature.models.Customer;
-import com.revature.models.CustomerAccounts;
+import com.revature.models.ListOfAccounts;
 import com.revature.models.Person;
 import com.revature.models.User;
 import com.revature.repositories.AccountDAO;
@@ -14,7 +14,7 @@ import com.revature.repositories.UserDAO;
 
 public class EmployeeService {
 
-	public CustomerAccounts viewAllCustomerAccounts() {
+	public ListOfAccounts viewAllCustomerAccounts() {
 		AccountDAO dao = new AccountDAO();
 		return dao.getAllAccounts();
 	}
@@ -35,7 +35,7 @@ public class EmployeeService {
 		int userId = newUser.getUserId();
 		newAccount.setUserId(userId);
 		accountDao.createAccount(newAccount);
-		BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " approved new application");
+		BankAppLauncher.appLogger.debug("Employee Id: " + CurrentUser.getUserId() + " approved new application");
 	}
 
 }

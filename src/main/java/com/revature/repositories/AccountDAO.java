@@ -7,13 +7,15 @@ import java.sql.SQLException;
 
 import com.revature.models.Account;
 import com.revature.models.CurrentUser;
-import com.revature.models.CustomerAccounts;
+import com.revature.models.ListOfAccounts;
 import com.revature.util.DatabaseConnection;
 
 public class AccountDAO {
+	private int currentAccountNumber;
 	private int currentUserId;
 
 	public AccountDAO() {
+		this.currentAccountNumber = CurrentUser.getCurrentAccount();
 		this.currentUserId = CurrentUser.getUserId();
 	}
 
@@ -44,13 +46,12 @@ public class AccountDAO {
 
 		try {
 
-			String sql = "select * from account where user_id=?;";
+			String sql = "select * from account where account_number=?;";
 			PreparedStatement getAccountStatement = newConnection.prepareStatement(sql);
-			getAccountStatement.setInt(1, this.currentUserId);
+			getAccountStatement.setInt(1, this.currentAccountNumber);
 			ResultSet result = getAccountStatement.executeQuery();
 			if (result.next()) {
 				currentAccount.setAccountBalance(result.getDouble("account_balance"));
-				currentAccount.setAccountNumber(result.getInt("account_number"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,10 +60,35 @@ public class AccountDAO {
 
 	}
 
-	public CustomerAccounts getAllAccounts() {
+	public ListOfAccounts checkMultipleAccounts() {
 		DatabaseConnection DbConnection = new DatabaseConnection();
 		Connection newConnection = DbConnection.getDbConnection();
-		CustomerAccounts listOfAccounts = new CustomerAccounts();
+		ListOfAccounts listOfAccounts = new ListOfAccounts();
+
+		try {
+
+			String sql = "select * from account where user_id = ?;";
+			PreparedStatement getAccountStatement = newConnection.prepareStatement(sql);
+			getAccountStatement.setInt(1, this.currentUserId);
+			ResultSet result = getAccountStatement.executeQuery();
+			while (result.next()) {
+				Account currentAccount = new Account();
+				currentAccount.setAccountBalance(result.getDouble("account_balance"));
+				currentAccount.setAccountNumber(result.getInt("account_number"));
+				currentAccount.setUserId(result.getInt("user_id"));
+				currentAccount.setType(result.getString("type"));
+				listOfAccounts.addAccount(currentAccount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listOfAccounts;
+	}
+
+	public ListOfAccounts getAllAccounts() {
+		DatabaseConnection DbConnection = new DatabaseConnection();
+		Connection newConnection = DbConnection.getDbConnection();
+		ListOfAccounts listOfAccounts = new ListOfAccounts();
 
 		try {
 
@@ -89,10 +115,10 @@ public class AccountDAO {
 		Connection newConnection = DbConnection.getDbConnection();
 		try {
 
-			String sql = "update account set account_balance = ? where user_id=? returning account_number;";
+			String sql = "update account set account_balance = ? where account_number=? returning user_id;";
 			PreparedStatement depositStatement = newConnection.prepareStatement(sql);
 			depositStatement.setDouble(1, balance);
-			depositStatement.setInt(2, this.currentUserId);
+			depositStatement.setInt(2, this.currentAccountNumber);
 			ResultSet result = depositStatement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();

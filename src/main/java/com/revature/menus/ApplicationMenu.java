@@ -27,6 +27,7 @@ public class ApplicationMenu extends Menu {
 		System.out.println("Your application has been submitted");
 		System.out.println();
 		System.out.println("Press 0 to exit");
+		System.out.println();
 	}
 
 	public Person newPerson() {

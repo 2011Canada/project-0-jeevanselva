@@ -3,6 +3,7 @@ package com.revature.menus;
 import java.util.Scanner;
 
 import com.revature.factory.MenuFactory;
+import com.revature.models.CurrentUser;
 import com.revature.service.LoginService;
 
 public class LoginMenu extends Menu {
@@ -19,6 +20,7 @@ public class LoginMenu extends Menu {
 		this.getInput();
 		System.out.println();
 		System.out.println("You have successfuly logged in!");
+		System.out.println();
 		System.out.println("Press 1 to continue");
 	}
 
@@ -44,16 +46,16 @@ public class LoginMenu extends Menu {
 
 	@Override
 	public Menu navigateMenu() {
-		Menu nextMenu = null;
+		Menu nextMenu = MenuFactory.menuBuilder("main");
 		switch (this.getOption()) {
 		case "1":
-			nextMenu = MenuFactory.menuBuilder("customer");
-			/*
-			 * if (CurrentUser.getRole().equals("customer")) {
-			 * 
-			 * } else if (CurrentUser.getRole().equals("employee")) { nextMenu =
-			 * MenuFactory.menuBuilder("employee"); }
-			 */
+
+			if (CurrentUser.getRole().equals("customer")) {
+				nextMenu = MenuFactory.menuBuilder("customer");
+
+			} else if (CurrentUser.getRole().equals("employee")) {
+				nextMenu = MenuFactory.menuBuilder("employee");
+			}
 			break;
 
 		}

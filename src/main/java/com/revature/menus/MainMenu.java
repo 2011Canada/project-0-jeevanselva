@@ -6,7 +6,8 @@ public class MainMenu extends Menu {
 
 	@Override
 	public void displayMenu() {
-
+		System.out.println("Welcome to the Bank of Neverland");
+		System.out.println();
 		System.out.println("1. Login: If you already have an account");
 		System.out.println("2. Register: If you want to create a new Bank account");
 	}

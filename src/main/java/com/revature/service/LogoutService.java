@@ -5,7 +5,7 @@ public class LogoutService {
 	public LogoutService() {
 	}
 
-	public void logout() {
+	public static void logout() {
 		UserService.clearCurrentUser();
 	}
 }

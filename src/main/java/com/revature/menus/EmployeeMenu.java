@@ -10,7 +10,7 @@ import java.util.Scanner;
 import com.revature.factory.MenuFactory;
 import com.revature.models.Account;
 import com.revature.models.Application;
-import com.revature.models.CustomerAccounts;
+import com.revature.models.ListOfAccounts;
 import com.revature.service.ApplicationService;
 import com.revature.service.EmployeeService;
 import com.revature.service.LogoutService;
@@ -32,14 +32,21 @@ public class EmployeeMenu extends Menu {
 		System.out.println("1. Check New Applications");
 		System.out.println("2. View Customer Accounts");
 		System.out.println("3. View all transactions");
+		System.out.println();
 	}
 
 	public void viewCustomers() {
-		CustomerAccounts accounts = employeeService.viewAllCustomerAccounts();
+		ListOfAccounts accounts = employeeService.viewAllCustomerAccounts();
 		ArrayList<Account> viewAccounts = (ArrayList<Account>) accounts.getAccounts();
 		Iterator<Account> iteratorAccounts = viewAccounts.iterator();
 		while (iteratorAccounts.hasNext()) {
 			System.out.println(iteratorAccounts.next());
+		}
+		System.out.println();
+		System.out.println("Press 0 to go back");
+		String option = "0";
+		while (!option.equals("0")) {
+			option = employeeScanner.nextLine();
 		}
 
 	}
@@ -54,9 +61,10 @@ public class EmployeeMenu extends Menu {
 		}
 	}
 
-	public void ViewAllTransactions() {
+	public void viewAllTransactions() {
+
 		try {
-			BufferedReader logReader = new BufferedReader(new FileReader("./log/trace.log"));
+			BufferedReader logReader = new BufferedReader(new FileReader(System.getenv("FILE")));
 			String logLine;
 
 			while ((logLine = logReader.readLine()) != null) {
@@ -68,16 +76,31 @@ public class EmployeeMenu extends Menu {
 
 			e.printStackTrace();
 		}
+		System.out.println();
+		System.out.println("Press 0 to go back");
+		String option = "0";
+		while (!option.equals("0")) {
+			option = employeeScanner.nextLine();
+		}
+
 	}
 
 	@Override
 	public Menu navigateMenu() {
-		Menu nextMenu = MenuFactory.menuBuilder("account");
+		Menu nextMenu = MenuFactory.menuBuilder("employee");
 		switch (this.getOption()) {
 		case "1":
+			this.checkApplications();
+			break;
 
+		case "2":
+			this.viewCustomers();
+			break;
+		case "3":
+			this.viewAllTransactions();
+			break;
 		case "0":
-			LogoutService service = new LogoutService();
+			LogoutService.logout();
 			nextMenu = MenuFactory.menuBuilder("main");
 		}
 		return nextMenu;

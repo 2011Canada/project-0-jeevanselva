@@ -26,8 +26,11 @@ public class Account {
 	}
 
 	public boolean accountWithdrawal(double withdrawalAmount) {
-		if (this.getAccountBalance() - withdrawalAmount < 0) {
+		if (withdrawalAmount <= 0) {
 			return false;
+		} else if ((this.getAccountBalance() - withdrawalAmount) <= 0) {
+			return false;
+
 		} else {
 			double balance = this.getAccountBalance() - withdrawalAmount;
 			this.setAccountBalance(balance);

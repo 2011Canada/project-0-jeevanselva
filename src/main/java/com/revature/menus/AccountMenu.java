@@ -31,11 +31,20 @@ public class AccountMenu extends Menu {
 		} else {
 			System.out.println("0. Logout");
 		}
+		System.out.println();
 	}
 
 	public void checkBalance() {
 		double currentBalance = this.accountService.accountBalanceService();
 		System.out.println("Current Balance: " + currentBalance);
+		System.out.println();
+		System.out.println();
+		System.out.println("Press 0 to go back");
+		String option = "0";
+		while (!option.equals("0")) {
+			option = scanner.nextLine();
+		}
+
 	}
 
 	public void withdrawal() {
@@ -50,6 +59,7 @@ public class AccountMenu extends Menu {
 				System.out.println("Invalid transaction");
 			}
 		}
+		System.out.println();
 	}
 
 	public void deposit() {
@@ -64,6 +74,7 @@ public class AccountMenu extends Menu {
 				System.out.println("Invalid transaction");
 			}
 		}
+		System.out.println();
 	}
 
 	public void moneyTransfer() {
@@ -80,6 +91,7 @@ public class AccountMenu extends Menu {
 				System.out.println("Invalid transaction");
 			}
 		}
+		System.out.println();
 	}
 
 	public void acceptTransfer() {
@@ -92,7 +104,7 @@ public class AccountMenu extends Menu {
 		} else if (response.equals("2")) {
 			this.transferService.acceptMoneyTransfer(false);
 		}
-
+		System.out.println();
 	}
 
 	@Override
@@ -115,7 +127,7 @@ public class AccountMenu extends Menu {
 			this.acceptTransfer();
 			break;
 		case "0":
-			LogoutService service = new LogoutService();
+			LogoutService.logout();
 			nextMenu = MenuFactory.menuBuilder("main");
 		}
 		return nextMenu;

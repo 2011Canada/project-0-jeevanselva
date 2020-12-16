@@ -3,7 +3,7 @@ package com.revature.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerAccounts {
+public class ListOfAccounts {
 	List<Account> accounts = new ArrayList<Account>();
 
 	public List<Account> getAccounts() {
@@ -26,7 +26,7 @@ public class CustomerAccounts {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CustomerAccounts other = (CustomerAccounts) obj;
+		ListOfAccounts other = (ListOfAccounts) obj;
 		if (accounts == null) {
 			if (other.accounts != null)
 				return false;

@@ -12,11 +12,11 @@ public class BankAppLauncher {
 	public static Logger appLogger = LogManager.getLogger("com.revature.banklogger");
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
+		appLogger.debug("Server Started");
 
+		Scanner scanner = new Scanner(System.in);
 		Menu currentMenu = MenuFactory.menuBuilder("main");
 		String option;
-
 		currentMenu.displayMenu();
 		while (true) {
 			option = scanner.nextLine();
