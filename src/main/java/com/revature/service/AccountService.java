@@ -44,13 +44,13 @@ public class AccountService {
 		double currentBalance = (dao.readAccount()).getAccountBalance();
 		double newBalance = currentBalance - withdrawalAmount;
 		if (amount <= 0 || newBalance < 0) {
-			BankAppLauncher.appLogger.debug("User Id: " + CurrentUser.getUserId()
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId()
 					+ " attempted an invalid withdrawal in account " + CurrentUser.getCurrentAccount());
 			return false;
 		} else {
 
 			dao.accountUpdate(newBalance);
-			BankAppLauncher.appLogger.debug("User Id: " + CurrentUser.getUserId() + " made a withdrawal in account "
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId() + " made a withdrawal in account "
 					+ CurrentUser.getCurrentAccount());
 			return true;
 		}

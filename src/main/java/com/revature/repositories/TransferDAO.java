@@ -28,7 +28,7 @@ public class TransferDAO {
 				balance = result.getDouble("account_balance");
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return balance;
@@ -45,7 +45,7 @@ public class TransferDAO {
 			depositStatement.setInt(2, accountNumber);
 			ResultSet result = depositStatement.executeQuery();
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 	}

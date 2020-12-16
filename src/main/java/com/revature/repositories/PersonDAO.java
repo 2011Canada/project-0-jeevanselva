@@ -35,7 +35,7 @@ public class PersonDAO {
 				person.setPersonId(result.getInt("person_Id"));
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 

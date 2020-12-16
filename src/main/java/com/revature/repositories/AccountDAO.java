@@ -35,7 +35,7 @@ public class AccountDAO {
 			createAccountStatement.setInt(4, account.getUserId());
 			createAccountStatement.executeUpdate();
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return account;
@@ -57,7 +57,6 @@ public class AccountDAO {
 				currentAccount.setAccountBalance(result.getDouble("account_balance"));
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return currentAccount;
@@ -84,7 +83,7 @@ public class AccountDAO {
 				listOfAccounts.addAccount(currentAccount);
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return listOfAccounts;
@@ -109,7 +108,7 @@ public class AccountDAO {
 				listOfAccounts.addAccount(currentAccount);
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return listOfAccounts;
@@ -127,7 +126,7 @@ public class AccountDAO {
 			depositStatement.setInt(2, this.currentAccountNumber);
 			ResultSet result = depositStatement.executeQuery();
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 

@@ -38,7 +38,7 @@ public class ApplicationService {
 		Customer newCustomer = new Customer(person, account, user);
 		Application newApplication = new Application(newCustomer);
 		ApplicationService.addApplicationToQueue(newApplication);
-		BankAppLauncher.appLogger.debug("New customer application submitted");
+		BankAppLauncher.appLogger.info("New customer application submitted");
 	}
 
 }

@@ -34,7 +34,7 @@ public class UserDAO {
 				newUser.setPersonId(result.getInt("user_Id"));
 			}
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return newUser;
@@ -61,7 +61,7 @@ public class UserDAO {
 			}
 
 		} catch (SQLException e) {
-			BankAppLauncher.appLogger.catching(e);
+
 			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return currentUser;

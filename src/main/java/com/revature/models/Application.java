@@ -55,7 +55,7 @@ public class Application {
 
 	@Override
 	public String toString() {
-		return "this.newCustomer";
+		return this.newCustomer.getPerson() + " " + (this.newCustomer.getAccount()).getType();
 	}
 
 }
