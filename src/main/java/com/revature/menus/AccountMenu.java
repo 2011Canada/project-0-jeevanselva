@@ -20,6 +20,7 @@ public class AccountMenu extends Menu {
 
 	@Override
 	public void displayMenu() {
+		System.out.println();
 		boolean transfer = transferService.checkMoneyTransfer();
 		System.out.println("1. Check your balance");
 		System.out.println("2. Make a withdrawal");

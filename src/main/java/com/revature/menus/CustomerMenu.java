@@ -14,6 +14,7 @@ public class CustomerMenu extends Menu {
 
 	@Override
 	public void displayMenu() {
+		System.out.println();
 		System.out.println("Choose your account: ");
 		accountService.checkMultipleAccounts();
 		accounts = (ArrayList<Account>) CurrentUser.getAccounts();

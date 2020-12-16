@@ -29,10 +29,11 @@ public class EmployeeMenu extends Menu {
 
 	@Override
 	public void displayMenu() {
-
+		System.out.println();
 		System.out.println("1. Check New Applications");
 		System.out.println("2. View Customer Accounts");
 		System.out.println("3. View all transactions");
+		System.out.println("0. Logout");
 		System.out.println();
 	}
 
