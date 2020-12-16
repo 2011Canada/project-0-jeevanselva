@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.User;
 import com.revature.util.DatabaseConnection;
 
@@ -33,7 +34,8 @@ public class UserDAO {
 				newUser.setPersonId(result.getInt("user_Id"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return newUser;
 
@@ -59,7 +61,8 @@ public class UserDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return currentUser;
 	}

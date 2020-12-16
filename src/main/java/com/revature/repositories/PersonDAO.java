@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Person;
 import com.revature.util.DatabaseConnection;
 
@@ -34,8 +35,10 @@ public class PersonDAO {
 				person.setPersonId(result.getInt("person_Id"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
+
 		return person;
 	}
 

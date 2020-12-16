@@ -3,22 +3,19 @@ package com.revature.service;
 import java.util.HashMap;
 
 import com.revature.launcher.BankAppLauncher;
-import com.revature.models.Account;
 import com.revature.models.CurrentUser;
-import com.revature.repositories.AccountDAO;
 import com.revature.repositories.TransferDAO;
 
 public class TransferService {
 	private static HashMap<String, String> moneyTransferMap = new HashMap<String, String>();
-	private Account userAccount;
+	AccountService accountService;
 	TransferDAO transferDao;
 	private int senderAccount;
 	private double moneyTransferAmount;
 
 	public TransferService() {
 		this.transferDao = new TransferDAO();
-
-		this.userAccount = new AccountDAO().getUserAccount();
+		this.accountService = new AccountService();
 	}
 
 	public int getSenderAccount() {
@@ -38,17 +35,15 @@ public class TransferService {
 
 	public boolean sendMoneyTransfer(String amount, String account) {
 		double amountInDouble = Double.parseDouble(amount);
-		boolean transaction = userAccount.accountWithdrawal(amountInDouble);
+		boolean transaction = accountService.accountWithdrawalService(amountInDouble);
 		String value = null;
 		if (transaction) {
-			AccountService accountService = new AccountService();
-			accountService.accountWithdrawalService(amountInDouble);
-			value = ((Integer) this.userAccount.getAccountNumber()).toString() + "XXXXX" + amount;
+			value = ((Integer) CurrentUser.getCurrentAccount()).toString() + "XXXXX" + amount;
 			moneyTransferMap.put(account, value);
-			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " sent valid money transfer");
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId() + " sent valid money transfer");
 			return true;
 		} else {
-			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " attempted invalid money transfer");
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId() + " attempted invalid money transfer");
 			return false;
 		}
 
@@ -56,9 +51,9 @@ public class TransferService {
 
 	public boolean checkMoneyTransfer() {
 		String moneyTransferAmountInString = null;
-		if (moneyTransferMap.containsKey(((Integer) this.userAccount.getAccountNumber()).toString())) {
+		if (moneyTransferMap.containsKey(((Integer) CurrentUser.getCurrentAccount()).toString())) {
 
-			String moneyTransferInfo = moneyTransferMap.get(((Integer) this.userAccount.getAccountNumber()).toString());
+			String moneyTransferInfo = moneyTransferMap.get(((Integer) CurrentUser.getCurrentAccount()).toString());
 			String senderAccountInString = moneyTransferInfo.substring(0, 3);
 			senderAccount = Integer.parseInt(senderAccountInString);
 			moneyTransferAmountInString = moneyTransferInfo.substring(8, moneyTransferInfo.length() - 1);
@@ -74,14 +69,14 @@ public class TransferService {
 		AccountService service = new AccountService();
 		if (accept == true) {
 			service.accountDepositService(this.moneyTransferAmount);
-			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " accepted money transfer");
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId() + " accepted money transfer");
 		} else {
 			double senderBalance = transferDao.readAnotherAccount(this.senderAccount);
 			senderBalance += this.moneyTransferAmount;
 			transferDao.updateAnotherAccount(this.senderAccount, senderBalance);
-			BankAppLauncher.appLogger.debug(CurrentUser.getUserId() + " declined money transfer");
+			BankAppLauncher.appLogger.info("User Id: " + CurrentUser.getUserId() + " declined money transfer");
 		}
-		String myAccount = ((Integer) this.userAccount.getAccountNumber()).toString();
+		String myAccount = ((Integer) CurrentUser.getCurrentAccount()).toString();
 		moneyTransferMap.remove(myAccount);
 
 	}

@@ -27,10 +27,9 @@ public class AccountMenu extends Menu {
 		System.out.println("4. Send money");
 		if (transfer) {
 			System.out.println("5. Recieved money");
-			System.out.println("0. Logout");
-		} else {
-			System.out.println("0. Logout");
 		}
+		System.out.println("9. Account Menu");
+		System.out.println("0. Logout");
 		System.out.println();
 	}
 
@@ -38,13 +37,6 @@ public class AccountMenu extends Menu {
 		double currentBalance = this.accountService.accountBalanceService();
 		System.out.println("Current Balance: " + currentBalance);
 		System.out.println();
-		System.out.println();
-		System.out.println("Press 0 to go back");
-		String option = "0";
-		while (!option.equals("0")) {
-			option = scanner.nextLine();
-		}
-
 	}
 
 	public void withdrawal() {
@@ -125,6 +117,9 @@ public class AccountMenu extends Menu {
 			break;
 		case "5":
 			this.acceptTransfer();
+			break;
+		case "9":
+			nextMenu = MenuFactory.menuBuilder("customer");
 			break;
 		case "0":
 			LogoutService.logout();

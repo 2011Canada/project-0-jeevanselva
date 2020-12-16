@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import com.revature.factory.MenuFactory;
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Account;
 import com.revature.models.Application;
 import com.revature.models.ListOfAccounts;
@@ -43,11 +44,6 @@ public class EmployeeMenu extends Menu {
 			System.out.println(iteratorAccounts.next());
 		}
 		System.out.println();
-		System.out.println("Press 0 to go back");
-		String option = "0";
-		while (!option.equals("0")) {
-			option = employeeScanner.nextLine();
-		}
 
 	}
 
@@ -74,15 +70,9 @@ public class EmployeeMenu extends Menu {
 
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			BankAppLauncher.appLogger.error("log file could not be opened");
 		}
 		System.out.println();
-		System.out.println("Press 0 to go back");
-		String option = "0";
-		while (!option.equals("0")) {
-			option = employeeScanner.nextLine();
-		}
-
 	}
 
 	@Override

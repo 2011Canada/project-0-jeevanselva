@@ -16,6 +16,7 @@ public class EmployeeMenuDebugger {
 		ApplicationService as = new ApplicationService();
 
 		em.viewAllTransactions();
+
 	}
 
 }

@@ -16,28 +16,6 @@ public class Account {
 		this.type = this.getClass().getName();
 	}
 
-	public boolean accountDeposit(double deposit) {
-		if (deposit <= 0) {
-			return false;
-		} else {
-			this.accountBalance += deposit;
-			return true;
-		}
-	}
-
-	public boolean accountWithdrawal(double withdrawalAmount) {
-		if (withdrawalAmount <= 0) {
-			return false;
-		} else if ((this.getAccountBalance() - withdrawalAmount) <= 0) {
-			return false;
-
-		} else {
-			double balance = this.getAccountBalance() - withdrawalAmount;
-			this.setAccountBalance(balance);
-			return true;
-		}
-	}
-
 	public double getAccountBalance() {
 		return this.accountBalance;
 	}

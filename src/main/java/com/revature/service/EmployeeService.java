@@ -27,7 +27,6 @@ public class EmployeeService {
 		Person newPerson = newCustomer.getPerson();
 		Account newAccount = newCustomer.getAccount();
 		User newUser = newCustomer.getUser();
-
 		newPerson = personDao.createPerson(newPerson);
 		int personId = newPerson.getPersonId();
 		newUser.setPersonId(personId);

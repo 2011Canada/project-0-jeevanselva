@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.models.Account;
 import com.revature.models.CurrentUser;
 import com.revature.models.ListOfAccounts;
@@ -27,19 +28,21 @@ public class AccountDAO {
 
 			String sql = "insert into account(account_number, type, account_balance, user_id) "
 					+ "values (?,?,?,?) returning account_number;";
-			PreparedStatement createPersonStatement = newConnection.prepareStatement(sql);
-			createPersonStatement.setInt(1, account.getAccountNumber());
-			createPersonStatement.setString(2, account.getType());
-			createPersonStatement.setDouble(3, account.getAccountBalance());
-			createPersonStatement.setInt(4, account.getUserId());
-			createPersonStatement.executeQuery();
+			PreparedStatement createAccountStatement = newConnection.prepareStatement(sql);
+			createAccountStatement.setInt(1, account.getAccountNumber());
+			createAccountStatement.setString(2, account.getType());
+			createAccountStatement.setDouble(3, account.getAccountBalance());
+			createAccountStatement.setInt(4, account.getUserId());
+			createAccountStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return account;
+
 	}
 
-	public Account getUserAccount() {
+	public Account readAccount() {
 		DatabaseConnection DbConnection = new DatabaseConnection();
 		Connection newConnection = DbConnection.getDbConnection();
 		Account currentAccount = new Account();
@@ -54,7 +57,8 @@ public class AccountDAO {
 				currentAccount.setAccountBalance(result.getDouble("account_balance"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return currentAccount;
 
@@ -80,7 +84,8 @@ public class AccountDAO {
 				listOfAccounts.addAccount(currentAccount);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return listOfAccounts;
 	}
@@ -104,7 +109,8 @@ public class AccountDAO {
 				listOfAccounts.addAccount(currentAccount);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return listOfAccounts;
 
@@ -121,7 +127,8 @@ public class AccountDAO {
 			depositStatement.setInt(2, this.currentAccountNumber);
 			ResultSet result = depositStatement.executeQuery();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 
 	}

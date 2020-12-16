@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.revature.launcher.BankAppLauncher;
 import com.revature.util.DatabaseConnection;
 
 public class TransferDAO {
@@ -27,7 +28,8 @@ public class TransferDAO {
 				balance = result.getDouble("account_balance");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 		return balance;
 	}
@@ -43,7 +45,8 @@ public class TransferDAO {
 			depositStatement.setInt(2, accountNumber);
 			ResultSet result = depositStatement.executeQuery();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			BankAppLauncher.appLogger.catching(e);
+			BankAppLauncher.appLogger.error("Internal error occured in the database");
 		}
 	}
 
